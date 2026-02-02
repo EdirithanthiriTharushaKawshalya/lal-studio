@@ -16,7 +16,7 @@ export default function CameraModel() {
     if (!group.current) return;
 
     // INITIAL HERO POSITION: Deep on the right, angled away from text
-    group.current.position.set(3, -0.9, -3); 
+    group.current.position.set(2.5, -0.9, -3); 
     group.current.rotation.set(0.6, 0.4, 0); // Positive Y angles it to the right
     group.current.scale.set(0.4, 0.4, 0.4);
 
