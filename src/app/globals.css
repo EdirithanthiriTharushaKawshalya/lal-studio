@@ -1,26 +1,41 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #000000;
+  --foreground: #ffffff;
 }
 
 body {
-  background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--background);
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+@layer components {
+  /* Material 3 Glass Card */
+  .glass-card {
+    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] transition-all duration-300;
+    /* Adding manual fallback for better glass effect */
+    background: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Fixed the hover:bg-opacity issue */
+  .glass-button {
+    @apply px-6 py-3 bg-white text-black rounded-full font-medium transition-all duration-200;
+  }
+  
+  .glass-button:hover {
+    @apply bg-white/90 scale-105;
+  }
+
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500;
+  }
+}
+
+/* Cinematic scrollbar hide */
+::-webkit-scrollbar {
+  display: none;
 }
