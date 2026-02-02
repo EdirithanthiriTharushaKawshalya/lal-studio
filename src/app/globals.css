@@ -14,28 +14,20 @@ body {
 }
 
 @layer components {
-  /* Material 3 Glass Card */
   .glass-card {
     @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem] transition-all duration-300;
-    /* Adding manual fallback for better glass effect */
-    background: rgba(255, 255, 255, 0.05);
   }
   
-  /* Fixed the hover:bg-opacity issue */
   .glass-button {
-    @apply px-6 py-3 bg-white text-black rounded-full font-medium transition-all duration-200;
-  }
-  
-  .glass-button:hover {
-    @apply bg-white/90 scale-105;
+    @apply px-8 py-3 bg-white text-black rounded-full font-bold uppercase tracking-widest text-[10px] transition-all duration-300;
   }
 
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-500;
+  .glass-button:hover {
+    @apply scale-105 bg-white/90;
   }
 }
 
-/* Cinematic scrollbar hide */
+/* Hide scrollbar for a cinematic feel */
 ::-webkit-scrollbar {
   display: none;
 }
