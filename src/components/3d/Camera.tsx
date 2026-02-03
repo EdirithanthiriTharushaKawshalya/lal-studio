@@ -9,7 +9,7 @@ import * as THREE from "three";
 gsap.registerPlugin(ScrollTrigger);
 
 export default function CameraModel() {
-  const { nodes, materials } = useGLTF("/models/camera.glb") as any;
+  const { scene } = useGLTF("/models/camera.glb");
   const group = useRef<THREE.Group>(null);
 
   useLayoutEffect(() => {
@@ -17,8 +17,8 @@ export default function CameraModel() {
 
     // INITIAL HERO POSITION: Deep on the right, angled away from text
     group.current.position.set(2.5, -0.9, -3); 
-    group.current.rotation.set(0.6, 0.4, 0); // Positive Y angles it to the right
-    group.current.scale.set(0.4, 0.4, 0.4);
+    group.current.rotation.set(0.3, 0.4, 0); // Positive Y angles it to the right
+    group.current.scale.set(3.0, 3.0, 3.0);
 
     const tl = gsap.timeline({
       scrollTrigger: {
@@ -35,7 +35,7 @@ export default function CameraModel() {
       .to(group.current.scale, { x: 1.5, y: 1.5, z: 1.5 }, 0); // Subtle zoom
 
     return () => { ScrollTrigger.getAll().forEach(t => t.kill()); };
-  }, [materials]);
+  }, []);
 
   useFrame((state) => {
     if (group.current) {
@@ -46,7 +46,7 @@ export default function CameraModel() {
 
   return (
     <group ref={group}>
-       <primitive object={nodes.Scene || nodes.RootNode || Object.values(nodes)[0]} />
+       <primitive object={scene} />
     </group>
   );
 }
