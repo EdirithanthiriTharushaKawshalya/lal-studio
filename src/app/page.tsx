@@ -5,8 +5,6 @@ import { ArrowRight, Camera, Cpu, Layers, Facebook } from "lucide-react";
 export default function Home() {
   return (
     <main className="relative bg-transparent overflow-x-hidden">
-      {/* 3D Background - Stays fixed while we scroll */}
-      <Scene />
 
       {/* Hero Section: Removed the gradient-to-r overlay entirely */}
       <section className="relative z-10 pt-32 pb-8 md:pt-48 md:pb-30 flex items-center pl-8 md:pl-80 px-8 md:px-24">

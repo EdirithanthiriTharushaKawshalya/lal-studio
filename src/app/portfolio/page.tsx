@@ -21,7 +21,7 @@ export default function PortfolioPage() {
   }, []);
 
   return (
-    <main className="min-h-screen bg-black pt-40 pb-20 px-6 md:px-20 selection:bg-white selection:text-black">
+    <main className="min-h-screen pt-40 pb-20 px-6 md:px-20 selection:bg-white selection:text-black">
       <div className="max-w-7xl mx-auto">
         <header className="mb-20 border-l border-white/20 pl-8">
           <motion.h1 
