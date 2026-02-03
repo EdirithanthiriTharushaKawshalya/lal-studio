@@ -1,7 +1,7 @@
 "use client";
 import React from 'react';
 import Link from 'next/link';
-import { Facebook, Instagram, Twitter, Mail, ArrowUpRight } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Mail, ArrowUpRight, Phone } from 'lucide-react';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -21,13 +21,13 @@ export default function Footer() {
               Based in Sri Lanka, serving global visions.
             </p>
             <div className="flex gap-4 pt-4">
-              <a href="https://facebook.com" target="_blank" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:border-white transition-all">
+              <a href="/under-development" target="_blank" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:border-white transition-all">
                 <Facebook size={18} className="text-white" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:border-white transition-all">
+              <a href="/under-development" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:border-white transition-all">
                 <Instagram size={18} className="text-white" />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:border-white transition-all">
+              <a href="/under-development" className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center border border-white/10 hover:border-white transition-all">
                 <Twitter size={18} className="text-white" />
               </a>
             </div>
@@ -44,12 +44,19 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Contact Column */}
+          {/* Contact Column - UPDATED */}
           <div className="space-y-6">
             <h4 className="text-[10px] uppercase tracking-[0.3em] text-gray-400 font-black">Contact</h4>
             <ul className="space-y-4 text-sm font-light text-gray-500">
               <li className="flex items-center gap-2 group cursor-pointer hover:text-white transition-colors">
-                <Mail size={14} /> hello@lalstudio.com
+                <Mail size={14} /> lalstudio.co@gmail.com
+              </li>
+              {/* Added Mobile Numbers */}
+              <li className="flex items-center gap-2 group cursor-pointer hover:text-white transition-colors">
+                <Phone size={14} /> +94 78 291 8452
+              </li>
+              <li className="flex items-center gap-2 group cursor-pointer hover:text-white transition-colors">
+                <Phone size={14} /> +94 77 743 5636
               </li>
               <li className="flex items-center gap-2 group cursor-pointer hover:text-white transition-colors">
                 Ambalangoda, Sri Lanka <ArrowUpRight size={14} />
@@ -65,8 +72,8 @@ export default function Footer() {
             &copy; {currentYear} LAL STUDIO &mdash; ENGINEERED IN SRI LANKA
           </p>
           <div className="flex gap-8 text-[10px] uppercase tracking-widest text-gray-600">
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
+            <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
+            <a href="/terms" className="hover:text-white transition-colors">Terms of Service</a>
           </div>
         </div>
       </div>

@@ -17,8 +17,8 @@ export default function BookingPage() {
     const bookingData = {
       client_name: formData.get('name'),
       email: formData.get('email'),
-      service_type: formData.get('service'),
       booking_date: formData.get('date'),
+      message: formData.get('message'), // Added message field
     };
 
     try {
@@ -30,69 +30,83 @@ export default function BookingPage() {
 
       setSubmitted(true);
     } catch (err: any) {
-      setError(err.message || "Something went wrong. Please try again.");
+      setError(err.message || "Transmission failed. Check connection.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <main className="min-h-screen bg-black pt-40 pb-20 px-6 flex items-center justify-center">
-      <div className="w-full max-w-2xl glass-card p-12 md:p-16 border-white/5 relative overflow-hidden">
-        
+    <main className="min-h-screen pt-40 pb-20 px-6 flex flex-col items-center justify-center selection:bg-white selection:text-black">
+      
+      {/* Background Decor */}
+      <div className="fixed inset-0 pointer-events-none opacity-20">
+        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-white/5 rounded-full blur-[120px]" />
+        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-white/5 rounded-full blur-[100px]" />
+      </div>
+
+      <div className="w-full max-w-2xl relative z-10">
         <AnimatePresence mode="wait">
           {!submitted ? (
             <motion.div
               key="form"
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
             >
-              <div className="mb-12 text-center">
-                <h1 className="text-5xl font-bold tracking-tighter mb-4">RESERVE A SESSION</h1>
-                <p className="text-gray-500 uppercase tracking-widest text-xs">Clinical Precision in Every Frame</p>
+              <div className="mb-16 border-l border-white/10 pl-8">
+                <h1 className="text-6xl md:text-7xl font-bold tracking-tighter mb-4 italic text-white">RESERVE</h1>
+                <p className="text-gray-500 uppercase tracking-[0.4em] text-[10px] font-mono">
+                  LAL STUDIO / Ambalangoda / Est. 1982
+                </p>
               </div>
 
-              <form onSubmit={handleSubmit} className="space-y-8">
+              <form onSubmit={handleSubmit} className="space-y-12 bg-white/[0.02] p-8 md:p-12 border border-white/5 rounded-3xl backdrop-blur-xl">
                 {error && (
-                  <div className="p-4 bg-red-500/10 border border-red-500/50 text-red-500 text-xs rounded-lg text-center">
-                    {error}
-                  </div>
+                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="p-4 bg-red-500/10 border border-red-500/20 text-red-500 text-[10px] uppercase tracking-widest text-center font-mono">
+                    System Error: {error}
+                  </motion.div>
                 )}
 
-                <div className="space-y-6">
-                  <div className="group border-b border-white/10 focus-within:border-white transition-all">
-                    <label className="text-[10px] uppercase tracking-widest text-gray-600 group-focus-within:text-white">Client Identity</label>
-                    <input name="name" type="text" required placeholder="Your Name" className="w-full bg-transparent py-4 text-xl outline-none" />
+                <div className="space-y-10">
+                  <div className="group space-y-2">
+                    <label className="text-[10px] uppercase tracking-[0.3em] text-gray-600 group-focus-within:text-white transition-colors font-mono">Client Identity</label>
+                    <input name="name" type="text" required placeholder="Full Name" className="w-full bg-transparent border-b border-white/10 py-3 text-2xl outline-none focus:border-white transition-all placeholder:text-white/5" />
                   </div>
                   
-                  <div className="group border-b border-white/10 focus-within:border-white transition-all">
-                    <label className="text-[10px] uppercase tracking-widest text-gray-600 group-focus-within:text-white">Electronic Mail</label>
-                    <input name="email" type="email" required placeholder="Email@Studio.com" className="w-full bg-transparent py-4 text-xl outline-none" />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+                    <div className="group space-y-2">
+                      <label className="text-[10px] uppercase tracking-[0.3em] text-gray-600 group-focus-within:text-white transition-colors font-mono">Electronic Mail</label>
+                      <input name="email" type="email" required placeholder="contact@domain.com" className="w-full bg-transparent border-b border-white/10 py-3 text-lg outline-none focus:border-white transition-all placeholder:text-white/5" />
+                    </div>
+                    <div className="group space-y-2">
+                      <label className="text-[10px] uppercase tracking-[0.3em] text-gray-600 group-focus-within:text-white transition-colors font-mono">Preferred Sync Date</label>
+                      <input name="date" type="date" required className="w-full bg-transparent border-b border-white/10 py-3 text-lg outline-none focus:border-white transition-all [color-scheme:dark]" />
+                    </div>
                   </div>
 
-                  <div className="grid grid-cols-2 gap-8">
-                    <div className="group border-b border-white/10 focus-within:border-white transition-all">
-                      <label className="text-[10px] uppercase tracking-widest text-gray-600 group-focus-within:text-white">Service Type</label>
-                      <select name="service" required className="w-full bg-transparent py-4 text-lg outline-none appearance-none cursor-pointer">
-                        <option className="bg-black">Editorial</option>
-                        <option className="bg-black">Portrait</option>
-                        <option className="bg-black">Product</option>
-                      </select>
-                    </div>
-                    <div className="group border-b border-white/10 focus-within:border-white transition-all">
-                      <label className="text-[10px] uppercase tracking-widest text-gray-600 group-focus-within:text-white">Preferred Date</label>
-                      <input name="date" type="date" required className="w-full bg-transparent py-4 text-lg outline-none [color-scheme:dark]" />
-                    </div>
+                  <div className="group space-y-2">
+                    <label className="text-[10px] uppercase tracking-[0.3em] text-gray-600 group-focus-within:text-white transition-colors font-mono">Project Brief / Message</label>
+                    <textarea 
+                      name="message" 
+                      rows={4} 
+                      required
+                      placeholder="Describe your visual requirements..." 
+                      className="w-full bg-white/[0.03] border border-white/10 rounded-xl p-6 text-lg outline-none focus:border-white/40 transition-all placeholder:text-white/5 resize-none" 
+                    />
                   </div>
                 </div>
 
-                <button 
-                  disabled={loading}
-                  className="w-full py-6 bg-white text-black font-black uppercase tracking-widest text-xs rounded-full hover:scale-[0.98] transition-all duration-300 disabled:bg-gray-400 disabled:cursor-not-allowed"
-                >
-                  {loading ? "Transmitting..." : "Send Inquiry"}
-                </button>
+                <div className="pt-6">
+                  <button 
+                    disabled={loading}
+                    className="group relative w-full py-6 bg-white text-black font-black uppercase tracking-[0.4em] text-[10px] rounded-full overflow-hidden transition-transform active:scale-95 disabled:bg-white/20 disabled:text-black/40"
+                  >
+                    <span className="relative z-10">{loading ? "Transmitting..." : "Initialize Request"}</span>
+                    <div className="absolute inset-0 bg-gray-200 translate-y-full group-hover:translate-y-0 transition-transform duration-500" />
+                  </button>
+                </div>
               </form>
             </motion.div>
           ) : (
@@ -100,22 +114,30 @@ export default function BookingPage() {
               key="success"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="text-center py-20"
+              className="text-center py-20 bg-white/[0.02] border border-white/5 rounded-3xl backdrop-blur-3xl"
             >
-              <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center mx-auto mb-8">
-                <svg className="w-10 h-10 text-black" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+              <div className="w-16 h-16 border border-white/20 rounded-full flex items-center justify-center mx-auto mb-10">
+                <motion.div 
+                  initial={{ scale: 0 }} 
+                  animate={{ scale: 1 }} 
+                  className="w-3 h-3 bg-white rounded-full" 
+                />
               </div>
-              <h2 className="text-4xl font-bold tracking-tighter mb-4">INQUIRY RECEIVED</h2>
-              <p className="text-gray-500 mb-10">Our studio coordinator will review your request and contact you shortly.</p>
+              <h2 className="text-5xl font-bold tracking-tighter mb-4 text-white italic">LOGGED</h2>
+              <p className="text-gray-500 text-xs uppercase tracking-[0.3em] mb-12">Session inquiry successfully transmitted.</p>
               <button 
                 onClick={() => setSubmitted(false)}
-                className="text-xs uppercase tracking-widest border-b border-white/20 pb-1 hover:border-white transition-all"
+                className="text-[10px] uppercase tracking-widest text-white/40 border-b border-white/10 pb-1 hover:text-white hover:border-white transition-all font-mono"
               >
-                Back to form
+                New Transmission
               </button>
             </motion.div>
           )}
         </AnimatePresence>
+
+        <footer className="mt-20 text-center opacity-20">
+            <span className="text-[9px] font-mono tracking-[0.4em] uppercase text-white">44 Years of Visual Engineering</span>
+        </footer>
       </div>
     </main>
   );
